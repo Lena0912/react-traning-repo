@@ -7,34 +7,76 @@ import { QuizForm } from "./QuizForm/QuizForm";
 export class App extends Component {
   state = {
     quizItems: initialQuizItems,
-    topicFilter: '',
-    levelFilter: 'all',
+    filters: {
+      topic: '',
+      level: 'all',
+},
+    
   };
 
-  changeTopicFilter = newFilter => {
-    this.setState({
-      topicFilter: newFilter,
-    });
+  deleteQuizItem = (quizId) => {
+    this.setState(prevState => ({
+      quizItems: prevState.quizItems.filter(quiz => quiz.id !== quizId),
+    }));
+    console.log('deleteQuizItem', quizId);
+  }; 
+
+  changeFilter = (key, value) => { 
+    this.setState(prevState => ({
+      filters: {
+        ...prevState.filters,
+        [key]: value,
+      },
+    }));
   };
 
-  changeLevelFilter = newLevel => {
-    this.setState({
-      levelFilter: newLevel,
+  // changeTopicFilter = newTopic => {
+  //   this.setState(prevState => ({
+  //     filters: {
+  //       ...prevState.filters,
+  //       topic: newTopic,
+  //     }
+      
+  //   }));
+  // };
+
+  // changeLevelFilter = newLevel => {
+  //   this.setState(prevState =>( {
+  //     filters: {
+  //       ...prevState.filters,
+  //       level: newLevel,
+  //     }
+  //   }));
+  // };
+
+  getVisibleItems = () => {
+    const { quizItems, filters } = this.state;
+    return quizItems.filter(quiz => {
+      const topicFilter = filters.topic.toLowerCase();
+      const hasTopic = quiz.topic.toLowerCase().includes(topicFilter);
+
+      if (filters.level === 'all') {
+        return hasTopic;
+      }
+      return hasTopic && quiz.level === filters.level;
     });
-  };
+}
 
   render() {
-    const { quizItems, topicFilter, levelFilter } = this.state;
+    
+const { filters } = this.state;
+    const visibleItems = this.getVisibleItems();
+
     return (
       <div>
-        <QuizForm/>
+        <QuizForm />
         <SearchBar
-          level={levelFilter}
-          topic={topicFilter}
-          onChangeTopic={this.changeTopicFilter}
-          onChangeLevel={this.changeLevelFilter}
+          filters={filters}
+          onChangeFilter={this.changeFilter}
+          // onChangeTopic={this.changeTopicFilter}
+          // onChangeLevel={this.changeLevelFilter}
         />
-        <QuizList items={quizItems} />
+        <QuizList items={visibleItems} onDelete={ this.deleteQuizItem} />
       </div>
     );
   }
