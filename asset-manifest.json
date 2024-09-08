@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Lena0912/react-traning-repo/static/css/main.7acaea2f.css",
-    "main.js": "/Lena0912/react-traning-repo/static/js/main.19df9ac1.js",
+    "main.css": "/Lena0912/react-traning-repo/static/css/main.edf6da3a.css",
+    "main.js": "/Lena0912/react-traning-repo/static/js/main.3af2037c.js",
     "index.html": "/Lena0912/react-traning-repo/index.html",
-    "main.7acaea2f.css.map": "/Lena0912/react-traning-repo/static/css/main.7acaea2f.css.map",
-    "main.19df9ac1.js.map": "/Lena0912/react-traning-repo/static/js/main.19df9ac1.js.map"
+    "main.edf6da3a.css.map": "/Lena0912/react-traning-repo/static/css/main.edf6da3a.css.map",
+    "main.3af2037c.js.map": "/Lena0912/react-traning-repo/static/js/main.3af2037c.js.map"
   },
   "entrypoints": [
-    "static/css/main.7acaea2f.css",
-    "static/js/main.19df9ac1.js"
+    "static/css/main.edf6da3a.css",
+    "static/js/main.3af2037c.js"
   ]
 }
