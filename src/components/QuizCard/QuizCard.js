@@ -1,18 +1,19 @@
+import { Container, InfoWrapper, Info } from './QuizCard.styled';
+
 export const QuizCard = ({
   quiz: { id, topic, level, time, questions },
   onDelete,
 }) => {
   
     return (
-      <div>
+      <Container level = {level}>
         <h2>{topic}</h2>
-        <div>
-
-          <button onClick={ () => onDelete(id)}>Delete</button>
-          <p>Level:{level}</p>
-          <p>Time:{time}min</p>
-          <p>Questions:{questions}</p>
-        </div>
-      </div>
+        <InfoWrapper>
+          <button onClick={() => onDelete(id)}>Delete</button>
+          <Info>Level:{level}</Info>
+          <Info>Time:{time}min</Info>
+          <Info>Questions:{questions}</Info>
+        </InfoWrapper>
+      </Container>
     );
 };

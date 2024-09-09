@@ -11,4 +11,5 @@ gap: 16px;
 
 export const ListItem = styled.li`
 flex-basis: calc((100% - 16px)/ 2);
+
 `;
