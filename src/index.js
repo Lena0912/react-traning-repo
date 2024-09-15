@@ -4,10 +4,22 @@ import { App } from 'components/App';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from 'components/GlobalStyle';
 
+const theme = {
+  colors: {
+    green: 'green',
+    error: 'red',
+  },
+  radii: {
+    sm: '4px',
+    md: '8px',
+    lg: '12px',
+  },
+  spacing: value => `${value * 4}px`,
+};
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ThemeProvider theme={{}}>
+    <ThemeProvider theme={theme}>
       <App />
       <GlobalStyle/>
     </ThemeProvider>

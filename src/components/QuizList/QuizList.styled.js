@@ -10,6 +10,6 @@ gap: 16px;
 `;
 
 export const ListItem = styled.li`
-flex-basis: calc((100% - 16px)/ 2);
+flex-basis: calc((100% - 32px)/ 3);
 
 `;

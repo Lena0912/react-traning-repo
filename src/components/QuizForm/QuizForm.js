@@ -1,7 +1,6 @@
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik, Field, } from 'formik';
 import * as Yup from 'yup';
-
-
+import { StyledForm, ErrMessage } from './QuisForm.styled';
 
 const quizSchema = Yup.object().shape({
   topic: Yup.string().min(3, 'Too short!').required('This field is required!'),
@@ -28,28 +27,28 @@ export const QuizForm = ({onAdd}) => {
         level: 'beginner',
       }}
       validationSchema={quizSchema}
-      onSubmit={(values, actions) => {        
+      onSubmit={(values, actions) => {
         onAdd(values);
         actions.resetForm();
       }}
     >
-      <Form>
+      <StyledForm>
         <label>
           Topic
           <Field name="topic" />
-          <ErrorMessage name="topic" />
+          <ErrMessage name="topic" component="div" />
         </label>
 
         <label>
           Time
           <Field type="number" name="time" />
-          <ErrorMessage name="time" />
+          <ErrMessage name="time" component="div" />
         </label>
 
         <label>
           Questions
           <Field type="number" name="questions" />
-          <ErrorMessage name="questions" />
+          <ErrMessage name="questions" component="div" />
         </label>
 
         <label>
@@ -59,11 +58,11 @@ export const QuizForm = ({onAdd}) => {
             <option value="intermediate">Intermediate</option>
             <option value="advanced">Advanced</option>
           </Field>
-          <ErrorMessage name="level" />
+          <ErrMessage name="level" component="div" />
         </label>
 
         <button type="submit">Add quiz</button>
-      </Form>
+      </StyledForm>
     </Formik>
   );
 };
