@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-const getBorderColor = ({theme, level}) => {
-    switch (level) {
+const getBorderColor = ({theme, $level}) => {
+    switch ($level) {
         case 'beginner':
             return theme.colors.green;
         case 'intermediate':
@@ -14,22 +14,18 @@ const getBorderColor = ({theme, level}) => {
 };
 
 export const Container = styled.div`
+position: relative;
 border: 3px solid ${getBorderColor};
 border-radius: ${p => p.theme.radii.sm};
-svg {
-  display: block;
-  color: red;
-}
+padding: ${p => {p.theme.spacing(2)}};
+
 `;
 
-export const InfoWrapper = styled.div`
-  display: flex;
-  gap: ${p => p.theme.spacing(2)};
-  padding: ${p => p.theme.spacing(1)};
-`;
 
 export const Info = styled.p`
 margin: 0;
+
+
 color: ${props => {
     switch (props.type) {
       case 'a':
@@ -44,6 +40,17 @@ color: ${props => {
 }}
 `;
 
-export const IconWrapper = styled.span`
-color: green;
+
+export const InfoWrapper = styled.div`
+  display: flex;
+  gap: ${p => p.theme.spacing(2)};
+  padding: ${p => p.theme.spacing(1)};
+`;
+
+export const ActionBar = styled.div`
+  position: absolute;
+  display: flex;
+  gap: ${p => p.theme.spacing(1)};
+  top: ${p => p.theme.spacing(2)};
+  right: ${p => p.theme.spacing(2)};
 `;

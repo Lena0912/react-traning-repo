@@ -4,6 +4,7 @@ import { QuizList } from "./QuizList/QuizList";
 import initialQuizItems from '../data.json';
 import { SearchBar } from "./SearchBar/SearchBar";
 import { QuizForm } from "./QuizForm/QuizForm";
+import { Layout } from "./Layout";
 
 export class App extends Component {
   state = {
@@ -12,6 +13,26 @@ export class App extends Component {
       topic: '',
       level: 'all',
 },    
+  };
+  componentDidMount() {
+    const savedFilters = localStorage.getItem('quiz-filters');
+    if (savedFilters !== null) {
+      this.setState({
+        filters: JSON.parse(savedFilters),
+      });
+    }
+}
+  
+  componentDidUpdate(prevProps, prevState) {
+    // console.log('prevState', prevState);
+    // console.log('this.state', this.state);
+
+    if (
+      prevState.filters !== this.state.filters
+      
+    ) {
+      localStorage.setItem('quiz-filters', JSON.stringify(this.state.filters));
+    }
   };
 
   addQuiz = newQuiz => {
@@ -36,25 +57,16 @@ export class App extends Component {
     }));
   };
 
-  // changeTopicFilter = newTopic => {
-  //   this.setState(prevState => ({
-  //     filters: {
-  //       ...prevState.filters,
-  //       topic: newTopic,
-  //     }
+  resetFilters = () => {
+    this.setState({
+      filters: {
+topic: '',
+      level: 'all',
+      }
       
-  //   }));
-  // };
-
-  // changeLevelFilter = newLevel => {
-  //   this.setState(prevState =>( {
-  //     filters: {
-  //       ...prevState.filters,
-  //       level: newLevel,
-  //     }
-  //   }));
-  // };
-
+    });
+}
+  
   getVisibleItems = () => {
     const { quizItems, filters } = this.state;
     return quizItems.filter(quiz => {
@@ -69,21 +81,20 @@ export class App extends Component {
 }
 
   render() {
-    
+    console.log('render');
 const { filters } = this.state;
     const visibleItems = this.getVisibleItems();
 
     return (
-      <div>
-        <QuizForm onAdd={ this.addQuiz} />
+      <Layout>
+        <QuizForm onAdd={this.addQuiz} />
         <SearchBar
           filters={filters}
           onChangeFilter={this.changeFilter}
-          // onChangeTopic={this.changeTopicFilter}
-          // onChangeLevel={this.changeLevelFilter}
+          onReset={this.resetFilters}
         />
-        <QuizList items={visibleItems} onDelete={ this.deleteQuizItem} />
-      </div>
+        <QuizList items={visibleItems} onDelete={this.deleteQuizItem} />
+      </Layout>
     );
   }
 }
